@@ -1,3 +1,31 @@
 body {
+  background-color: white;
+}
+header {
+  width : 250px;
+  height: 60px;
+  margin: 0 auto;
   background-color: blue;
+  text-align: center;
+}
+
+ul {
+  width : 500px;
+  margin : 0 auto;
+}
+
+li {
+  width: 98px;
+  height: 98px;
+  border : 1px solid black;
+  list-style: none;
+  float :left;
+}
+div {
+  clear: both;
+  width : 250px;
+  height: 60px;
+  margin: 0 auto;
+  background-color: blue;
+  text-align: center;
 }
