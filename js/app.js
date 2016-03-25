@@ -54,7 +54,7 @@ function addObject(i) {
   var randomEvent = events[Math.floor(Math.random()*events.length)]
   var randomWidth = Math.floor(Math.random()* $container.width());
 
-  $("body").append("<div id='bubble_"+i+"'>"+randomEvent+"</div>");
+  ("body").append("<div id='bubble_"+i+"'>"+randomEvent+"</div>");
   
   var $bubble = $("#bubble_"+i)
   $bubble.on(randomEvent, correct);
