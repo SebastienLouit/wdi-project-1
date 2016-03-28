@@ -5,15 +5,15 @@
  border-radius: 20%;
  background-color: green;
  position: absolute;
- float: left;
- display : none;
 }
 
 body {
   background-color: black;
 }
 
-//Start Button 
+
+
+/*Start Button*/
 
 @import url(http://fonts.googleapis.com/css?family=Nunito:300);
 

@@ -3,7 +3,7 @@ $(function(){
 });
 
 var events        = ["click", "dblclick"];
-var colors        = ["./drunkSmiley","blue","white"];
+var colors        = ["#FF4136","#7FDBFF","#001f3f","#85144b","#DDDDDD"];
 var bubbleCounter = 0;
 var points        = 0;
 var bubbleHeights = [];
@@ -97,10 +97,6 @@ function collision($div1, $div2) {
   if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) return false;
   return true;
 }
-
-
-
-////Start Page mechanisme ///
 
 
 
