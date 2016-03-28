@@ -3,22 +3,13 @@ $(function(){
 
 
 
-var events        = ["click", "dblclick"];
-var colors        = ["#FF4136","#7FDBFF","#001f3f","#85144b","#DDDDDD"];
-var bubbleCounter = 0;
-var points        = 0;
-var bubbleHeights = [];
-var bubble        = document.getElementsByTagName("div");
-var fallSpeed     = 2000
-
-function playAgain() {
-  $("#newGame").on("click",function(){
-    for (var i = 0; i < bubble.length; i++) {
-      bubble[i].remove();
-    }
-  });
-}
-
+var events          = ["click", "dblclick","swipe"];
+var colors          = ["#FF4136","#7FDBFF","#001f3f"];
+var bubbleCounter   = 0;
+var points          = 0;
+var bubbleHeights   = [];
+var bubble          = document.getElementsByTagName("div");
+var fallSpeed       = 2000
 
 
 function moreBubble() {
@@ -37,19 +28,26 @@ setInterval(function(){
 }, 2000);
 
 function addObject(bubbleCounter) {
-  var $container  = $("main");
-  var randomEvent = events[Math.floor(Math.random()*events.length)];
-  var randomWidth = Math.floor(Math.random()* $container.width());
-  var $bubble     = $("#bubble_"+bubbleCounter);
-  var dh          = $bubble.outerHeight();
-  var dw          = $bubble.outerWidth();
-  var xy          = $bubble.position();
-  var randomColor = colors[Math.floor(Math.random()*colors.length)]
+  var randomGenerator = Math.floor((Math.random() * 3));
+  var $container      = $("main");
+  var randomWidth     = Math.floor(Math.random()* $container.width());
+  var $bubble         = $("#bubble_"+bubbleCounter);
+  var dh              = $bubble.outerHeight();
+  var dw              = $bubble.outerWidth();
+  var xy              = $bubble.position();
+  var randomEvent     = events[randomGenerator]
+  var randomColor     = colors[randomGenerator]
+ 
 
-  var bubbleText = "<div class='bubble' id='bubble_"+bubbleCounter+"'></div>";
+  var bubbleText = "<div class='bubble' id='bubble_"+bubbleCounter+"'+"randomEvent"></div>";
   $($container).append(bubbleText);
 
-  $bubble.on(randomEvent, correct);
+
+  if (randomEvent === "swipe") {
+    addSwipeEvent($bubble);
+  } else {
+    $bubble.on(randomEvent, correct);
+  }
 
   $bubble.css({
     left: randomWidth,
@@ -103,35 +101,40 @@ function collision($div1, $div2) {
 //Swipe
 
 
-var touchstartX = 0;
-var touchendX = 0;
-var gesuredZone = document.getElementById('#swipeDiv');
+function addSwipeEvent($bubble) {
+  var touchstartX = 0;
+  var touchendX = 0;
+  var gesuredZone = bubble;
+  $bubble.mousedown(mouseDown);
+  $bubble.mouseup(mouseUp);
 
-
-$("#swipeDiv").mousedown(mouseDown);
-$("#swipeDiv").mouseup(mouseUp);
-
-function mouseDown() {
-  touchstartX = event.screenX;
-  console.log (touchstartX)
-}
-
-function mouseUp() {
-  touchendX = event.screenX;
-  console.log (touchendX)
-  handleGesure(this);
-}
-
-function handleGesure(elem) {
-  if (touchendX < touchstartX) {
-    $(elem).remove();
-    console.log("left")
+  function mouseDown() {
+    touchstartX = event.screenX;
+    console.log (touchstartX)
   }
-  if (touchendX > touchstartX) {
-    $(elem).remove();
-    console.log("right")
+
+  function mouseUp() {
+    touchendX = event.screenX;
+    console.log (touchendX)
+    handleGesure(this);
+  }
+
+  function handleGesure(elem) {
+    if (touchendX < touchstartX) {
+      $(elem).remove();
+      console.log("left")
+    }
+    if (touchendX > touchstartX) {
+      $(elem).remove();
+      console.log("right")
+    }
   }
 }
+
+
+
+
+
 
 
 
