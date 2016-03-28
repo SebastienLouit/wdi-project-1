@@ -18,7 +18,10 @@ html, body{
   width:100px;
   height: 100px;
   border-radius: 20%;
-  background-color: green;
+  background-image: url(http://vignette1.wikia.nocookie.net/fantendo/images/9/97/1-DownMushroom.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; 
   position: absolute;
   opacity: 1;
   display: block;
@@ -33,6 +36,16 @@ body {
   background-image: url("http://img2.hebus.com/hebus_2010/10/28/preview/101028223430_35.jpg");
   background-repeat: no-repeat;
   background-size: 100%;
+}
+
+
+#title {
+  border : 1px solid black;
+  position: absolute;
+  top: 350px;
+  left: 500px;
+  width: 1px;
+  height: 200px;
 }
 
 /*Start Button*/

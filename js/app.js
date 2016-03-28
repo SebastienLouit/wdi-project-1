@@ -1,8 +1,5 @@
 $(function(){
  
-
-
-
 var events          = ["click", "dblclick","swipe"];
 var colors          = ["#FF4136","#7FDBFF","#001f3f"];
 var bubbleCounter   = 0;
@@ -13,7 +10,7 @@ var fallSpeed       = 2000
 
 
 function moreBubble() {
-  for (var i = 0; i < 2; i++) {
+  for (var i = 0; i < 3; i++) {
     addObject(bubbleCounter);
   }
   bubbleCounter++;
@@ -28,7 +25,7 @@ setInterval(function(){
 }, 2000);
 
 function addObject(bubbleCounter) {
-  var randomGenerator = Math.floor((Math.random() * 3));
+  var randomGenerator = Math.floor((Math.random() * events.length));
   var $container      = $("main");
   var randomWidth     = Math.floor(Math.random()* $container.width());
   var $bubble         = $("#bubble_"+bubbleCounter);
@@ -39,7 +36,7 @@ function addObject(bubbleCounter) {
   var randomColor     = colors[randomGenerator]
  
 
-  var bubbleText = "<div class='bubble' id='bubble_"+bubbleCounter+"'+"randomEvent"></div>";
+  var bubbleText = "<div class='bubble' id='bubble_"+bubbleCounter+"'></div>";
   $($container).append(bubbleText);
 
 
@@ -122,20 +119,14 @@ function addSwipeEvent($bubble) {
   function handleGesure(elem) {
     if (touchendX < touchstartX) {
       $(elem).remove();
-      console.log("left")
+      points++;
     }
     if (touchendX > touchstartX) {
       $(elem).remove();
-      console.log("right")
+      points++;
     }
   }
 }
-
-
-
-
-
-
 
 
 //Animate div
@@ -164,7 +155,15 @@ $(".movingDiv").animate({
 },"slow");
 
 
+setTimeout(titleAnimation, 2300);
 
+function titleAnimation (){
+
+$("#title").animate({
+  width:"+250",
+  backgroundColor: white
+})
+}
 
 });
 

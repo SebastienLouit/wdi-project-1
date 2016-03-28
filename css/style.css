@@ -41,11 +41,6 @@ div{
   background-size: cover;
 }
 
-.imageBox {
-border:1px solid black;
-width: 58px;
-height: 58px;
-}
 
 main {
   width: 300px;
@@ -65,11 +60,27 @@ section {
   text-align: center;
   float:right;
   border: 1px solid #FF4136;
+  font-size: 30px; 
 }
 
 .instructions{
   width: 518px;
   height: 58px;
-
 }
 
+#points {
+  font-size: 50px;
+  line-height: 180px;
+  background-color: black;
+  color: white;
+}
+#red {
+  background-color: #FF4136;
+}
+#lightBlue {
+  background-color: #7FDBFF;
+}
+#darkBlue {
+  background-color: #001f3f;
+  color :white;
+}
