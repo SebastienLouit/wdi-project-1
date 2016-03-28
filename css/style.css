@@ -5,6 +5,7 @@ html {
   background-image: url("http://img2.hebus.com/hebus_2010/10/28/preview/101028223430_35.jpg");
   background-repeat: no-repeat;
   background-size: 100%;
+  height: 1300px;
 }
 body {
   background-color: #0074D9;
@@ -31,6 +32,13 @@ div{
   display: none;
   position: absolute;
   top: -20px;
+}
+
+.bubble {
+  background-image: url(http://vignette1.wikia.nocookie.net/fantendo/images/9/97/1-DownMushroom.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 main {

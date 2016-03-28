@@ -1,19 +1,42 @@
 
-#dropDiv {
+html, body{
+  height: 1300px;
+  display : block;
+}
+
+
+#swipeDiv {
  width:100px;
  height: 100px;
  border-radius: 20%;
  background-color: green;
  position: absolute;
+ opacity: 1;
+}
+
+.movingDiv {
+  width:100px;
+  height: 100px;
+  border-radius: 20%;
+  background-color: green;
+  position: absolute;
+  opacity: 1;
+  display: block;
+  text-align: center;
+  vertical-align: middle;
+  font-family: "Nunito", sans-serif; font-size: 24px;
+
 }
 
 body {
   background-color: black;
+  background-image: url("http://img2.hebus.com/hebus_2010/10/28/preview/101028223430_35.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
-
-
 /*Start Button*/
+
 
 @import url(http://fonts.googleapis.com/css?family=Nunito:300);
 

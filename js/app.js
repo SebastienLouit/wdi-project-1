@@ -1,6 +1,7 @@
 $(function(){
-  init();
-});
+ 
+
+
 
 var events        = ["click", "dblclick"];
 var colors        = ["#FF4136","#7FDBFF","#001f3f","#85144b","#DDDDDD"];
@@ -10,7 +11,7 @@ var bubbleHeights = [];
 var bubble        = document.getElementsByTagName("div");
 var fallSpeed     = 2000
 
-function init() {
+function playAgain() {
   $("#newGame").on("click",function(){
     for (var i = 0; i < bubble.length; i++) {
       bubble[i].remove();
@@ -97,6 +98,77 @@ function collision($div1, $div2) {
   if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) return false;
   return true;
 }
+
+
+//Swipe
+
+
+var touchstartX = 0;
+var touchendX = 0;
+var gesuredZone = document.getElementById('#swipeDiv');
+
+
+$("#swipeDiv").mousedown(mouseDown);
+$("#swipeDiv").mouseup(mouseUp);
+
+function mouseDown() {
+  touchstartX = event.screenX;
+  console.log (touchstartX)
+}
+
+function mouseUp() {
+  touchendX = event.screenX;
+  console.log (touchendX)
+  handleGesure(this);
+}
+
+function handleGesure(elem) {
+  if (touchendX < touchstartX) {
+    $(elem).remove();
+    console.log("left")
+  }
+  if (touchendX > touchstartX) {
+    $(elem).remove();
+    console.log("right")
+  }
+}
+
+
+
+//Animate div
+
+
+$(".movingDiv").animate({
+  left  : '1000px',
+  height: '100px',
+  width : '100px'
+},"slow");
+
+$(".movingDiv").animate({
+  top   : "300px",
+},"slow");
+
+$(".movingDiv").animate({
+  left   : "200px",
+},"slow");
+
+
+$(".movingDiv").animate({
+  height:'+=150px',
+  width : '+=150px',
+  padding :"+30px",
+  fontSize : "+70px",
+},"slow");
+
+
+
+
+});
+
+
+
+    
+  
 
 
 
