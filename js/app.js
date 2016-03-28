@@ -1,71 +1,107 @@
 $(function(){
   init();
-})
-
+});
 
 var events        = ["click", "dblclick"];
-var bubbleCounter = 0
-
-
-
+var colors        = ["./drunkSmiley","blue","white"];
+var bubbleCounter = 0;
+var points        = 0;
+var bubbleHeights = [];
+var bubble        = document.getElementsByTagName("div");
+var fallSpeed     = 2000
 
 function init() {
-  $("#StartButton").on("click",function(){
-    for (var i = 0; i < 2; i++) {
-      addObject(bubbleCounter)
+  $("#newGame").on("click",function(){
+    for (var i = 0; i < bubble.length; i++) {
+      bubble[i].remove();
     }
-    bubbleCounter++
-  })
+  });
 }
+
+
 
 function moreBubble() {
   for (var i = 0; i < 2; i++) {
-  addObject(bubbleCounter)
+    addObject(bubbleCounter);
+  }
+  bubbleCounter++;
+  if (fallSpeed > 300) {fallSpeed = fallSpeed-200
+  } else {
+    fallSpeed = 250
+  }
 }
-  bubbleCounter++
-}
 
-
-setInterval(function(){ 
-  moreBubble();}, 1000);
-
+setInterval(function(){
+  moreBubble();
+}, 2000);
 
 function addObject(bubbleCounter) {
   var $container  = $("main");
-  var randomEvent = events[Math.floor(Math.random()*events.length)]
+  var randomEvent = events[Math.floor(Math.random()*events.length)];
   var randomWidth = Math.floor(Math.random()* $container.width());
-  var $bubble = $("#bubble_"+bubbleCounter)
-  $bubble.on(randomEvent, correct);
-  var dh = $bubble.outerHeight();
-  var dw = $bubble.outerWidth();
+  var $bubble     = $("#bubble_"+bubbleCounter);
+  var dh          = $bubble.outerHeight();
+  var dw          = $bubble.outerWidth();
+  var xy          = $bubble.position();
+  var randomColor = colors[Math.floor(Math.random()*colors.length)]
 
-  $($container).append("<div id='bubble_"+bubbleCounter+"'>"+randomEvent+"</div>");
+  var bubbleText = "<div class='bubble' id='bubble_"+bubbleCounter+"'></div>";
+  $($container).append(bubbleText);
+
+  $bubble.on(randomEvent, correct);
 
   $bubble.css({
     left: randomWidth,
-    display: 'block'
+    display: 'block',
+    backgroundColor: randomColor
   }).animate({
     top: $container.height() - dh,
     opacity: 1
-  }, 3000);
+  }, {
+    duration: fallSpeed,
+    step: function(currentLeft){
+      $(".bubble:not(#bubble_"+bubbleCounter+")").each(function(index, bubble){
+        if (collision($bubble, $(bubble))) {
+          $bubble.stop();
+          if(document.getElementById("bubble"+"_"+bubbleCounter).style.top < 100+"px"){
+            alert ("You Lose")
+          }
+        }
+      });
+    }
+  }, 3000, function(){
+    bubbleHeights.push();
+  });
 }
-
-
 
 function correct(){
-  var points = 0
-  $(this).remove();
-  points++
   document.getElementById("points").innerHTML = points;
+  $(this).fadeOut();
+  points++;
+}
+
+function collision($div1, $div2) {
+  var x1 = $div1.offset().left;
+  var y1 = $div1.offset().top;
+  var h1 = $div1.outerHeight(true);
+  var w1 = $div1.outerWidth(true);
+  var b1 = y1 + h1;
+  var r1 = x1 + w1;
+  var x2 = $div2.offset().left;
+  var y2 = $div2.offset().top;
+  var h2 = $div2.outerHeight(true);
+  var w2 = $div2.outerWidth(true);
+  var b2 = y2 + h2;
+  var r2 = x2 + w2;
+
+  if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) return false;
+  return true;
 }
 
 
-////WORKING AREA ///
 
-// if (rect1.x < rect2.x + rect2.width &&
-//    rect1.x + rect1.width > rect2.x &&
-//    rect1.y < rect2.y + rect2.height &&
-//    rect1.height + rect1.y > rect2.y) {
-//     // collision detected!
-// }
+////Start Page mechanisme ///
+
+
+
 
