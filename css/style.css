@@ -32,9 +32,6 @@ div{
   display: none;
   position: absolute;
   top: -20px;
-}
-
-.bubble {
   background-image: url(http://vignette1.wikia.nocookie.net/fantendo/images/9/97/1-DownMushroom.png);
   background-repeat: no-repeat;
   background-position: center;
@@ -84,3 +81,22 @@ section {
   background-color: #001f3f;
   color :white;
 }
+
+@media only screen and (max-width: 640px) {
+  body, main  {
+    width: 100%;
+    height: 100%;
+  }
+  div {
+    height: 100px;
+    width : 100px;
+  }
+  .instructions{
+    display: none;
+  }
+  #points {
+    width: 100%;
+    height: 100%;
+  }
+}
+
