@@ -9,7 +9,7 @@ $(function(){
   var fallSpeed       = 3000
   var poppingSpeed    = null
   var bubbleCohort    = []
-
+  var fallingSpeed    = 2000
 
 
   var moreBubble = function () {
@@ -27,7 +27,7 @@ $(function(){
     moreBubble();
     bubbleCohort.push(bubbleCounter-1)
     console.log(bubbleCohort)
-  }, 1500);
+  }, fallingSpeed);
 
   function addObject(bubbleCounter) {
     var randomGenerator = Math.floor((Math.random() * events.length));
@@ -66,7 +66,7 @@ $(function(){
         $(".bubble:not(#bubble_"+bubbleCounter+")").each(function(index, bubble){
           if (collision($bubble, $(bubble))) {
             $bubble.stop();
-            if(document.getElementById("bubble"+"_"+bubbleCounter).style.top < 100+"px"){
+            if(document.getElementById("bubble"+"_"+bubbleCounter).style.top < -15+"px"){
             clearInterval(poppingSpeed)
             console.log(bubbleCohort);
             $(bubbleCohort).each(function(index) {
@@ -74,6 +74,7 @@ $(function(){
               $(bubbleName).fadeOut();
               console.log(bubbleCohort);
               document.getElementById("points").innerHTML = "LOOSE";
+              randomEvent =[]
               })
             }
           }
