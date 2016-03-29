@@ -7,10 +7,12 @@ $(function(){
   var bubbleHeights   = [];
   var bubble          = document.getElementsByTagName("div");
   var fallSpeed       = 3000
+  var poppingSpeed    = null
+  var bubbleCohort    = []
 
 
 
-  function moreBubble() {
+  var moreBubble = function () {
     for (var i = 0; i < 3; i++) {
       addObject(bubbleCounter);
     }
@@ -21,8 +23,10 @@ $(function(){
     }
   }
 
-  setInterval(function(){
+  poppingSpeed =  setInterval(function(){
     moreBubble();
+    bubbleCohort.push(bubbleCounter-1)
+    console.log(bubbleCohort)
   }, 1500);
 
   function addObject(bubbleCounter) {
@@ -35,6 +39,8 @@ $(function(){
     var xy              = $bubble.position();
     var randomEvent     = events[randomGenerator]
     var randomColor     = colors[randomGenerator]
+
+
 
 
     var bubbleText = "<div class='bubble' id='bubble_"+bubbleCounter+"'></div>";
@@ -61,10 +67,14 @@ $(function(){
           if (collision($bubble, $(bubble))) {
             $bubble.stop();
             if(document.getElementById("bubble"+"_"+bubbleCounter).style.top < 100+"px"){
-              // for (var i = 0; i < bubbleCounter; i++) {
-              //   $bubble[i].fadeOut()
-              alert ("TOO MANY CHAMPS")
-              return false
+            clearInterval(poppingSpeed)
+            console.log(bubbleCohort);
+            $(bubbleCohort).each(function(index) {
+              var bubbleName = "#bubble_" + bubbleCohort[index];
+              $(bubbleName).fadeOut();
+              console.log(bubbleCohort);
+              document.getElementById("points").innerHTML = "LOOSE";
+              })
             }
           }
         });
@@ -72,14 +82,6 @@ $(function(){
     }, 1000, function(){
       bubbleHeights.push();
     });
-    function keepFalling ($bubble){
-      while (bubbleHeights !=="1000px") {
-          $bubble.animate({
-            top   : "300px",
-          },"slow");
-      }
-    }
-
   }
 
   function correct(){
@@ -170,8 +172,6 @@ $(".movingDiv").animate({
 setTimeout(titleAnimation, 2300);
 
 function titleAnimation (){
-
-
 
   $("#title").animate({
     width:"+250",
