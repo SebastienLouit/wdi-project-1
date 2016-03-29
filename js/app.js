@@ -1,6 +1,6 @@
 $(function(){
 
-  var events          = ["click", "dblclick","swipe"];
+  var events          = ["click", "dblclick", "swipe"];
   var colors          = ["#FF4136","#7FDBFF","#001f3f"];
   var bubbleCounter   = 0;
   var points          = 0;
@@ -9,15 +9,16 @@ $(function(){
   var fallSpeed       = 3000
   var poppingSpeed    = null
   var bubbleCohort    = []
-  var fallingSpeed    = 2000
+  
 
 
   var moreBubble = function () {
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < 2; i++) {
       addObject(bubbleCounter);
     }
     bubbleCounter++;
-    if (fallSpeed > 300) {fallSpeed = fallSpeed-100
+    if (fallSpeed > 300) {
+      fallSpeed = fallSpeed-100
     } else {
       fallSpeed = 300
     }
@@ -26,8 +27,7 @@ $(function(){
   poppingSpeed =  setInterval(function(){
     moreBubble();
     bubbleCohort.push(bubbleCounter-1)
-    console.log(bubbleCohort)
-  }, fallingSpeed);
+  }, 2000);
 
   function addObject(bubbleCounter) {
     var randomGenerator = Math.floor((Math.random() * events.length));
@@ -39,18 +39,20 @@ $(function(){
     var xy              = $bubble.position();
     var randomEvent     = events[randomGenerator]
     var randomColor     = colors[randomGenerator]
-
-
-
-
     var bubbleText = "<div class='bubble' id='bubble_"+bubbleCounter+"'></div>";
+    
     $($container).append(bubbleText);
 
-
+   
     if (randomEvent === "swipe") {
       addSwipeEvent($bubble);
-    } else {
-      $bubble.on(randomEvent, correct);
+      console.log (randomEvent)
+    } else if (randomEvent === "click") {
+      $bubble.on("click",correct)
+      console.log (randomEvent)
+    } else if (randomEvent === "dblclick") {
+      $bubble.on("dblclick",correct)
+      console.log (randomEvent)
     }
 
     $bubble.css({
@@ -63,6 +65,7 @@ $(function(){
     }, {
       duration: fallSpeed,
       step: function(currentLeft){
+
         $(".bubble:not(#bubble_"+bubbleCounter+")").each(function(index, bubble){
           if (collision($bubble, $(bubble))) {
             $bubble.stop();
@@ -73,8 +76,7 @@ $(function(){
               var bubbleName = "#bubble_" + bubbleCohort[index];
               $(bubbleName).fadeOut();
               console.log(bubbleCohort);
-              document.getElementById("points").innerHTML = "LOOSE";
-              randomEvent =[]
+              document.getElementById("points").innerHTML = "LOSE";
               })
             }
           }
@@ -86,8 +88,8 @@ $(function(){
   }
 
   function correct(){
-    document.getElementById("points").innerHTML = points;
     $(this).fadeOut();
+    document.getElementById("points").innerHTML = points;
     points++;
   }
 
